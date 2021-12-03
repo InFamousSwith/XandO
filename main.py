@@ -18,14 +18,20 @@ def steps(count):
     print(f"Игрок номер {count % 2 + 1} введите поле")
     coords = list(map(int, input().split()))
     if len(coords) == 2:
-        if 0<=coords[0]<=2 and 0<=coords[1]<=2:
-            if count % 2 == 1:
-                field[coords[0]][coords[1]] = 'x'
+        if 0 <= coords[0] <= 2 and 0 <= coords[1] <= 2:
+            if field[coords[0]][coords[1]] == ' ':
+                if count % 2 == 1:
+                    field[coords[0]][coords[1]] = 'x'
+                else:
+                    field[coords[0]][coords[1]] = 'o'
             else:
-                field[coords[0]][coords[1]] = 'o'
+                print("Место занято")
+                steps(count)
         else:
+            print("Координаты вне поля")
             steps(count)
     else:
+        print("Нужно только две координаты")
         steps(count)
 
 
@@ -50,5 +56,10 @@ while True:
     if win(count):
         printf()
         break
+    if count == 8:
+        print("Ничья")
+        printf()
+        break
     count += 1
+
 
